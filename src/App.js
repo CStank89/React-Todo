@@ -13,24 +13,28 @@ class App extends React.Component {
     };
   }
 
-  render() {
-    return (
-      <div>
-        <h2>Welcome to your Todo App!</h2>
-        <TodoList />
-        <ToDo />
-      </div>
-    );
-  }
-
   componentDidMount = () => {
     const todos = localStorage.getItem("todos");
     if (todos) {
-      console.log("has todos:", todos);
+      const savedTodos = JSON.parse(todos);
+      this.setState({ todos: savedTodos });
     } else {
       console.log("has no todos");
     }
   };
+
+  addTodo = async (todo) => {
+    await this.setState({ todos: [...this.state.todos, todo] });
+    localStorage.setItem("todos", JSON.stringify(this.state.todos));
+  };
+  render() {
+    return (
+      <div>
+        <h2>Welcome to your Todo App!</h2>
+        {<TodoList addTodoFn={this.addTodo}></TodoList>}
+      </div>
+    );
+  }
 }
 
 export default App;
