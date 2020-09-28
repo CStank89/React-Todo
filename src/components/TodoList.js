@@ -9,4 +9,4 @@ class ToDoList extends React.Component {
   }
 }
 
-export default TodoList;
+export default ToDoList;
