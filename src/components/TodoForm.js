@@ -14,12 +14,17 @@ class TodoForm extends React.Component {
   submitTodo = (e) => {
     e.preventDefault();
     this.props.addTodoFn(this.state.todo);
+    document.getElementById("addTodoInput").value = "";
   };
   render() {
     return (
       <div className="addTodoContainer">
         <form onSubmit={(e) => this.submitTodo(e)}>
-          <input onChange={(e) => this.updateInput(e)} type="text"></input>
+          <input
+            id="addTodoInput"
+            onChange={(e) => this.updateInput(e)}
+            type="text"
+          ></input>
           <button type="submit">Add</button>
         </form>
       </div>
